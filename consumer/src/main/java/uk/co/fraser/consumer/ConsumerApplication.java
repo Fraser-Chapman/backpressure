@@ -5,8 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
+import uk.co.fraser.shared.model.Event;
 
-import java.io.Serializable;
 import java.time.Duration;
 
 @SpringBootApplication
@@ -38,4 +38,3 @@ public class ConsumerApplication implements CommandLineRunner {
     }
 }
 
-record Event(String content) {}
