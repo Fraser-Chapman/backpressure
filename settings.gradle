@@ -1,0 +1,4 @@
+rootProject.name = 'backpressure'
+
+include 'producer'
+include 'consumer'
