@@ -1,5 +1,6 @@
 package uk.co.fraser.producer;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,9 +12,12 @@ import java.time.Duration;
 @RequestMapping("/api/event")
 public class EventController {
 
-    @GetMapping
-    public Flux<String> getEvents() {
-        return Flux.interval(Duration.ofMillis(1))
-                .map(Object::toString);
+    @GetMapping(produces = MediaType.APPLICATION_NDJSON_VALUE)
+    public Flux<Event> getEvents() {
+        System.out.println("======== Producing events =======");
+        return Flux.interval(Duration.ofMillis(100))
+                .map(value -> new Event(value.toString()));
     }
+
+    public record Event(String content) {}
 }
