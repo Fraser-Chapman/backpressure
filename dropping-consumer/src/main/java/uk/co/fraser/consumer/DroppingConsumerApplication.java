@@ -10,16 +10,16 @@ import uk.co.fraser.shared.model.Event;
 import java.time.Duration;
 
 @SpringBootApplication
-public class ConsumerApplication implements CommandLineRunner {
+public class DroppingConsumerApplication implements CommandLineRunner {
 
     private final WebClient.Builder webClientBuilder;
 
-    public ConsumerApplication(final WebClient.Builder webClientBuilder) {
+    public DroppingConsumerApplication(final WebClient.Builder webClientBuilder) {
         this.webClientBuilder = webClientBuilder;
     }
 
     static void main(String[] args) {
-        SpringApplication.run(ConsumerApplication.class, args);
+        SpringApplication.run(DroppingConsumerApplication.class, args);
     }
 
     @Override
