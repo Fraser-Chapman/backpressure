@@ -3,8 +3,8 @@ package uk.co.fraser.consumer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.BufferOverflowStrategy;
 import uk.co.fraser.shared.model.Event;
 
 import java.time.Duration;
@@ -28,13 +28,10 @@ public class ConsumerApplication implements CommandLineRunner {
         final WebClient webClient = webClientBuilder.build();
         webClient.get()
                 .uri("http://localhost:8080/api/event")
-                .accept(MediaType.APPLICATION_NDJSON)
                 .exchangeToFlux(response -> response.bodyToFlux(Event.class))
-                .map(value -> {
-                    System.out.println(value);
-                    return value;
-                })
-                .blockLast(Duration.ofSeconds(30));
+                .onBackpressureBuffer(10, BufferOverflowStrategy.DROP_OLDEST)
+                .delayElements(Duration.ofMillis(500))
+                .subscribe(event -> System.out.println("Consumed event: " + event));
     }
 }
 

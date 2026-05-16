@@ -16,7 +16,12 @@ public class EventController {
     @GetMapping(produces = MediaType.APPLICATION_NDJSON_VALUE)
     public Flux<Event> getEvents() {
         System.out.println("======== Producing events =======");
-        return Flux.interval(Duration.ofMillis(100))
-                .map(value -> new Event(value.toString()));
+        return Flux.range(1, 100)
+                .delayElements(Duration.ofMillis(100))
+                .map(value -> new Event(value.toString()))
+                .map(event -> {
+                    System.out.println("Producing event: " + event);
+                    return event;
+                });
     }
 }
