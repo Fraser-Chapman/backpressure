@@ -1,5 +1,5 @@
 rootProject.name = 'backpressure'
 
 include 'producer'
-include 'consumer'
+include 'dropping-consumer'
 include 'shared'
