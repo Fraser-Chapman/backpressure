@@ -9,6 +9,10 @@ import uk.co.fraser.shared.model.Event;
 
 import java.time.Duration;
 
+/**
+ * This application consumes messages and keeps a buffer of 10 messages. In the event of the buffer overflowing,
+ * the oldest message is dropped. This results in messages from the producer being skipped.
+ */
 @SpringBootApplication
 public class DroppingConsumerApplication implements CommandLineRunner {
 
