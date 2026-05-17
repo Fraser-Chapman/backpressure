@@ -22,6 +22,7 @@ public class EventController {
                 .map(event -> {
                     System.out.println("Producing event: " + event);
                     return event;
-                });
+                })
+                .doOnComplete(() -> System.out.println("====== Finished producing! ======"));
     }
 }
