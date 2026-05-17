@@ -13,6 +13,9 @@ import java.time.Duration;
 @RequestMapping("/api/event")
 public class EventController {
 
+    /**
+     * @return a Reactive Stream that produces 100 messages 100ms apart.
+     */
     @GetMapping(produces = MediaType.APPLICATION_NDJSON_VALUE)
     public Flux<Event> getEvents() {
         System.out.println("======== Producing events =======");
